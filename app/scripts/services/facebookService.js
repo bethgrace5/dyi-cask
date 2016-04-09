@@ -1,6 +1,6 @@
 angular.module('dyiCaskApp')
 
-.factory('facebookService', function($q, FB) {
+.factory('facebookService', function($q) {
     return {
         getMyLastName: function() {
             var deferred = $q.defer();
@@ -8,6 +8,7 @@ angular.module('dyiCaskApp')
                 fields: 'last_name'
             }, function(response) {
                 if (!response || response.error) {
+                    //console.log(JSON.stringify(response))
                     deferred.reject('Error occured');
                 } else {
                     deferred.resolve(response);
