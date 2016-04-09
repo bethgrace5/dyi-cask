@@ -15,11 +15,12 @@ angular.module('dyiCaskApp', [
     'ngResource',
     'ngRoute',
     'ngSanitize',
-    'ngTouch'
+    'ngTouch',
+    'LocalStorageModule'
 ])
 
-.config(['$routeProvider', '$logProvider',
-  function($routeProvider, $logProvider) {
+.config(['$routeProvider', '$logProvider', 'localStorageServiceProvider',
+  function($routeProvider, $logProvider, localStorageServiceProvider) {
   // Routes
   $routeProvider
     .when('/', {
@@ -59,9 +60,14 @@ angular.module('dyiCaskApp', [
   // Logging
   $logProvider.debugEnabled(true);
 
+  // local storage
+  localStorageServiceProvider
+    .setPrefix('cask')
+    .setStorageType('localStorage')
+    .setNotify(true, true)
 }])
 
-.run(['$rootScope', '$window', function($rootScope, $window) {
+.run(['$rootScope', '$window', 'localStorageService', function($rootScope, $window, localStorageService) {
 
   $rootScope.user = {};
 
@@ -74,6 +80,13 @@ angular.module('dyiCaskApp', [
       cookie: true, 
       xfbml: true,
       version: 'v2.4'
+    });
+
+    FB.getLoginStatus(function(response) {
+      if (response.status === 'connected') {
+        localStorageService.set('fb_token', response.authResponse.accessToken);
+        //console.log(localStorageService.get('fb_token'));
+      }
     });
 
     $rootScope.$broadcast('fb-init');
