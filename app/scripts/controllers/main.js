@@ -8,25 +8,19 @@
  * Controller of the dyiCaskApp
  */
 angular.module('dyiCaskApp')
-  .controller('MainCtrl', function (
-    $facebook,
-    $log,
-    $scope) {
+  .controller('MainCtrl', function (facebookService, $log, $scope) {
 
-    // bind directly to the response promise
-    $scope.loginStatus = $facebook.getLoginStatus();
-    //$log.debug($scope.loginStatus);
-
-    // use the promise in code
-    $facebook.getLoginStatus().then(
-      function(response) {
-        $scope.loginResponse = response;
-        $log.debug(response);
+    $scope.$on('fb-init', function(event, args) 
+    {
+      facebookService.getMyLastName().then(
+      function(response) 
+      {
+        $log.debug(JSON.stringify(response));
       },
-      function(response) {
-        $scope.loginError = response.error;
-        $log.debug(response);
+      function(response) { 
+        $log.debug(JSON.stringify(response));
       });
-
+    });
+    
 
   });
