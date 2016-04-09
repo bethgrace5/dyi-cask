@@ -12,7 +12,7 @@ angular.module('dyiCaskApp')
 
     $scope.$on('fb-init', function(event, args) 
     {
-      facebookService.getMyLastName().then(
+      facebookService.getPageEventsById(108905739150385).then(
       function(response) 
       {
         $log.debug(JSON.stringify(response));
