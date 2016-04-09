@@ -98,12 +98,17 @@ angular.module('dyiCaskApp')
           $scope.places = [];
         });
     }
-
-    $scope.$on('fb-init', function(event, args) 
-    {
+    $scope.$on('fb-init', function(event, args) {
       $scope.getPageInfoByIds($scope.placeRef);
       $scope.getPageEventsByIds($scope.placeRef, new Date());
+      facebookService.getMyLastName().then(
+      function(response) {
+        $log.debug(JSON.stringify(response));
+      },
+      function(response) {
+        $log.debug(JSON.stringify(response));
+      });
     });
-    
+
 
   });
