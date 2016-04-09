@@ -29,6 +29,26 @@ angular.module('dyiCaskApp', [
       controller: 'AboutCtrl',
       controllerAs: 'about'
     })
+    .when('/listLocations', {
+      templateUrl: 'views/locations.html',
+      controller: 'LocationsCtrl',
+      controllerAs: 'locations'
+    })
+    .when('/listEvents', {
+      templateUrl: 'views/events.html',
+      controller: 'EventsCtrl',
+      controllerAs: 'events'
+    })
+    .when('/event', {
+      templateUrl: 'views/event.html',
+      controller: 'EventCtrl',
+      controllerAs: 'event'
+    })
+    .when('/location', {
+      templateUrl: 'views/location.html',
+      controller: 'LocationCtrl',
+      controllerAs: 'location'
+    })
     .otherwise({
       redirectTo: '/'
     });
