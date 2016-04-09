@@ -8,6 +8,7 @@
  *
  * Main module of the application.
  */
+
 angular.module('dyiCaskApp', [
     'ngAnimate',
     'ngCookies',
@@ -15,9 +16,11 @@ angular.module('dyiCaskApp', [
     'ngRoute',
     'ngSanitize',
     'ngTouch',
-    'facebook'
-]).config(['$routeProvider', '$facebookProvider', '$logProvider',
-  function($routeProvider, $facebookProvider, $logProvider) {
+    'LocalStorageModule'
+])
+
+.config(['$routeProvider', '$logProvider', 'localStorageServiceProvider',
+  function($routeProvider, $logProvider, localStorageServiceProvider) {
   // Routes
   $routeProvider
     .when('/', {
@@ -54,15 +57,61 @@ angular.module('dyiCaskApp', [
       redirectTo: '/'
     });
 
-  // Facebook setup
-  $facebookProvider.init({
-    appId: '584673925032739',
-    secret: '13d40000d4dc84e91efdc804487bb231',
-    channel: 'views/channel.html'
-  });
-
   // Logging
   $logProvider.debugEnabled(true);
 
+  // local storage
+  localStorageServiceProvider
+    .setPrefix('cask')
+    .setStorageType('localStorage')
+    .setNotify(true, true)
 }])
+
+.run(['$rootScope', '$window', 'localStorageService', function($rootScope, $window, localStorageService) {
+
+  $rootScope.user = {};
+
+  $window.fbAsyncInit = function() {
+
+    FB.init({ 
+      appId: '584673925032739',
+      channelUrl: 'app/channel.html',
+      status: true, 
+      cookie: true, 
+      xfbml: true,
+      version: 'v2.4'
+    });
+
+    FB.getLoginStatus(function(response) {
+      if (response.status === 'connected') {
+        localStorageService.set('fb_token', response.authResponse.accessToken);
+        //console.log(localStorageService.get('fb_token'));
+      }
+    });
+
+    $rootScope.$broadcast('fb-init');
+  };
+}]);
+
+(function(d){
+    // load the Facebook javascript SDK
+
+    var js, 
+    id = 'facebook-jssdk', 
+    ref = d.getElementsByTagName('script')[0];
+
+    if (d.getElementById(id)) {
+      return;
+    }
+
+    js = d.createElement('script'); 
+    js.id = id; 
+    js.async = true;
+    js.src = "//connect.facebook.net/en_US/all.js";
+
+    ref.parentNode.insertBefore(js, ref);
+
+  }(document));
+
+
 
