@@ -16,7 +16,8 @@ angular.module('dyiCaskApp', [
     'ngSanitize',
     'ngTouch',
     'facebook'
-]).config(['$routeProvider', function($routeProvider) {
+]).config(['$routeProvider', '$facebookProvider', '$logProvider',
+  function($routeProvider, $facebookProvider, $logProvider) {
   // Routes
   $routeProvider
     .when('/', {
@@ -52,12 +53,16 @@ angular.module('dyiCaskApp', [
     .otherwise({
       redirectTo: '/'
     });
-}])
-.config(['$facebookProvider', function($facebookProvider) {
+
   // Facebook setup
   $facebookProvider.init({
     appId: '584673925032739',
+    secret: '13d40000d4dc84e91efdc804487bb231',
     channel: 'views/channel.html'
   });
-}]);
+
+  // Logging
+  $logProvider.debugEnabled(true);
+
+}])
 
