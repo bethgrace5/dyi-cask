@@ -54,6 +54,7 @@ angular.module('dyiCaskApp', [
 
 .run(['$rootScope', '$window', 'localStorageService', function($rootScope, $window, localStorageService) {
 
+  $rootScope.facebookIsReady = false;
   $rootScope.user = {};
 
   $window.fbAsyncInit = function() {
