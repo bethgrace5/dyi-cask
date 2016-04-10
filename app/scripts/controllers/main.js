@@ -89,11 +89,12 @@ angular.module('dyiCaskApp')
             {
               var e = events[0];
 
-              places.push({ place_name: e.place_name,
-                                place_img_url: $scope.placeInfo[e.place_id].picture.data.url,
-                                place_likes: $scope.placeInfo[e.place_id].likes,
-                                place_were_here_count: $scope.placeInfo[e.place_id].were_here_count,
-                                events: events });
+            places.push({     place_id: e.place_id,
+                              place_name: e.place_name,
+                              place_img_url: $scope.placeInfo[e.place_id].picture.data.url,
+                              place_likes: $scope.placeInfo[e.place_id].likes,
+                              place_were_here_count: $scope.placeInfo[e.place_id].were_here_count,
+                              events: events });
             }
 
             var eventPromises = [];
