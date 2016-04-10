@@ -8,13 +8,8 @@
  * Controller of the dyiCaskApp
  */
 angular.module('dyiCaskApp')
-  .controller('LocationCtrl', function ($scope, $routeParams) {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-    $scope.example = $routeParams.test;
+  .controller('PlaceCtrl', function ($scope, $routeParams) {
+    $scope.id = $routeParams.id;
 
     $scope.array = [
     {"event": "Karaoke",
