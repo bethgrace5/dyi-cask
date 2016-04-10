@@ -1,1 +1,17 @@
-<p>Here will be a list of locations</p>
+
+<div ng-repeat="p in places | orderBy: '-place_likes'">
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <div class="row">
+        <div class="col-xs-3">
+          <img ng-src="{{p.place_img_url}}"/>
+        </div>
+        <div class="col-xs-9">
+          <p class="lead">
+            {{p.place_name}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

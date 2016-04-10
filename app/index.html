@@ -25,37 +25,57 @@
         <div class="container">
           <div class="navbar-header">
 
+
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#js-navbar-collapse">
               <span class="sr-only">Toggle navigation</span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
               <span class="icon-bar"></span>
             </button>
-
-            <a class="navbar-brand" href="#/">dyiCask</a>
+                <!-- mobile display facebook icon -->
+                <div style="margin-top:15px; margin-left:10px" class="pull-left hidden-sm hidden-md hidden-lg hidden-xl">
+                  <fb:login-button show-faces="false"
+                    scope="public_profile,email"
+                    max-rows="1" size="icon"
+                    data-auto-logout-link="true">
+                  </fb:login-button>
+                </div>
+              <span class="navbar-brand pull-left" href="#/">What's Happening
+              </span>
           </div>
 
           <div class="collapse navbar-collapse" id="js-navbar-collapse">
-
             <ul class="nav navbar-nav">
               <li class="active"><a href="#/">Dashboard</a></li>
               <li><a ng-href="#/about">About</a></li>
-              <li><a ng-href="#/">Contact</a></li>
               <li><a ng-href="#/listEvents">List of Events</a></li>
               <li><a ng-href="#/listLocations">List of Locations</a></li>
               <li><a ng-href="#/location/1">test</a></li>
+              </li>
             </ul>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="container">
-    <div ng-view=""></div>
+    <!-- Facebook root -->
+    <div class="" id="fb-root"></div>
+
+    <div class="container" ng-controller="MainCtrl">
+      <div ng-view=""></div>
+      </div>
     </div>
 
     <div class="footer">
       <div class="container">
+        <!-- desktop display facebook icon -->
+        <div class="pull-left hidden-xs">
+          <fb:login-button show-faces="true"
+            scope="public_profile,email"
+            max-rows="4" size="small"
+            data-auto-logout-link="true">
+          </fb:login-button>
+        </div>
         <p><span class="glyphicon glyphicon-heart"></span> from the Yeoman team</p>
       </div>
     </div>

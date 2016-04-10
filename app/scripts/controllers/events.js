@@ -8,10 +8,8 @@
  * Controller of the dyiCaskApp
  */
 angular.module('dyiCaskApp')
-  .controller('EventsCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('EventsCtrl', function (facebookService, $scope, $log) {
+
+
   });
+

@@ -8,10 +8,11 @@
  * Controller of the dyiCaskApp
  */
 angular.module('dyiCaskApp')
-  .controller('EventCtrl', function () {
+  .controller('EventCtrl', function ($scope) {
     this.awesomeThings = [
       'HTML5 Boilerplate',
       'AngularJS',
       'Karma'
     ];
+
   });

@@ -8,10 +8,5 @@
  * Controller of the dyiCaskApp
  */
 angular.module('dyiCaskApp')
-  .controller('LocationsCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('LocationsCtrl', function ($scope) {
   });
