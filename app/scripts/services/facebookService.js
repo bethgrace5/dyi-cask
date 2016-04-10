@@ -2,18 +2,22 @@ angular.module('dyiCaskApp')
 
 .factory('facebookService', function($q, localStorageService) {
     return {
-        getMyLastName: function() {
+        getPageInfoById: function(page_id) {
             var deferred = $q.defer();
-            FB.api('/me', {
-                fields: 'last_name',
-                access_token: localStorageService.get('fb_token')
-            }, function(response) {
-                if (!response || response.error) {
-                    deferred.reject('Error occured');
-                } else {
-                    deferred.resolve(response);
-                }
-            });
+
+            FB.api('/' + page_id, 'GET', {
+                fields:"name,picture,likes,were_here_count",
+                access_token: localStorageService.get('fb_token')},
+                
+                function(response) {
+                    if (!response || response.error) {
+                        
+                        deferred.reject('Error occured');
+                    } else {
+                        deferred.resolve(response);
+                    }
+                });
+
             return deferred.promise;
         },
 
