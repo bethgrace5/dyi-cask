@@ -48,7 +48,7 @@ angular.module('dyiCaskApp', [
       controller: 'EventCtrl',
       controllerAs: 'event'
     })
-    .when('/location', {
+    .when('/location/:test', {
       templateUrl: 'views/location.html',
       controller: 'LocationCtrl',
       controllerAs: 'location'
