@@ -10,7 +10,7 @@
 angular.module('dyiCaskApp')
   .controller('MainCtrl', function (facebookService, $q, $log, $scope) {
 
-    $scope.locationRef = [
+    $scope.placeRef = [
       '410616265786425',
       '875835105860557',
       '941260815906419',
@@ -22,7 +22,7 @@ angular.module('dyiCaskApp')
       '290894474287798'
       ];  
 
-    $scope.locationInfo = {}
+    $scope.placeInfo = {}
 
     $scope.getPageInfoByIds = function(page_ids)
     {
@@ -36,10 +36,10 @@ angular.module('dyiCaskApp')
           var pageInfo = {};
 
           response.forEach(function (e) {
-            $scope.locationInfo[e.id] = e;
+            $scope.placeInfo[e.id] = e;
           });
 
-          $log.debug($scope.locationInfo);
+          $log.debug($scope.placeInfo);
         },
         function(response) {
           $log.debug(response);
@@ -55,7 +55,7 @@ angular.module('dyiCaskApp')
 
       $q.all(promises).then(
         function(response) {
-          var locations = [];
+          var places = [];
 
           $log.debug(response);
 
@@ -82,27 +82,27 @@ angular.module('dyiCaskApp')
             {
               var e = events[0];
 
-              locations.push({ place_name: e.place_name, 
-                                place_img_url: $scope.locationInfo[e.place_id].picture.data.url,
-                                place_likes: $scope.locationInfo[e.place_id].likes,
-                                place_were_here_count: $scope.locationInfo[e.place_id].were_here_count,
+              places.push({ place_name: e.place_name, 
+                                place_img_url: $scope.placeInfo[e.place_id].picture.data.url,
+                                place_likes: $scope.placeInfo[e.place_id].likes,
+                                place_were_here_count: $scope.placeInfo[e.place_id].were_here_count,
                                 events: events });
             }
           }
 
-          $scope.locations = locations;
-          $log.debug($scope.locations);
+          $scope.places = places;
+          $log.debug($scope.places);
         },
         function(response) {
           $log.debug(response);
-          $scope.locations = [];
+          $scope.places = [];
         });
     }
 
     $scope.$on('fb-init', function(event, args) 
     {
-      $scope.getPageInfoByIds($scope.locationRef);
-      $scope.getPageEventsByIds($scope.locationRef, new Date());
+      $scope.getPageInfoByIds($scope.placeRef);
+      $scope.getPageEventsByIds($scope.placeRef, new Date());
     });
     
 
