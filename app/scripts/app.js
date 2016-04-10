@@ -28,22 +28,12 @@ angular.module('dyiCaskApp', [
       controller: 'MainCtrl',
       controllerAs: 'main'
     })
-    .when('/about', {
-      templateUrl: 'views/about.html',
-      controller: 'AboutCtrl',
-      controllerAs: 'about'
-    })
     .when('/listLocations', {
       templateUrl: 'views/locations.html',
       controller: 'LocationsCtrl',
       controllerAs: 'locations'
     })
-    .when('/listEvents', {
-      templateUrl: 'views/events.html',
-      controller: 'EventsCtrl',
-      controllerAs: 'events'
-    })
-    .when('/event', {
+    .when('/location/:id', {
       templateUrl: 'views/event.html',
       controller: 'EventCtrl',
       controllerAs: 'event'
