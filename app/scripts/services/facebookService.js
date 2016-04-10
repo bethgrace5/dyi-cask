@@ -38,6 +38,24 @@ angular.module('dyiCaskApp')
                 });
 
             return deferred.promise;
+        },
+
+        getEventCoverPhotoById: function(event_id) {
+            var deferred = $q.defer();
+
+            FB.api('/' + event_id +'/?fields=cover', 'GET', {
+                access_token: localStorageService.get('fb_token')},
+                
+                function(response) {
+                    if (!response || response.error) {
+                        
+                        deferred.reject('Error occured');
+                    } else {
+                        deferred.resolve(response);
+                    }
+                });
+
+            return deferred.promise;
         }
     }
 })

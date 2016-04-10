@@ -39,17 +39,19 @@ angular.module('dyiCaskApp')
             $scope.placeInfo[e.id] = e;
           });
 
-          $log.debug($scope.placeInfo);
+          //$log.debug($scope.placeInfo);
         },
         function(response) {
-          $log.debug(response);
+          //$log.debug(response);
         });
     }
 
     $scope.getPageEventsByIds = function(page_ids, after_dttm)
     {
       var promises = [];
+      var eventDataMap = {};
 
+      // Get events for all pages
       for (var i = 0; i < page_ids.length; i++)
         promises.push(facebookService.getPageEventsById(page_ids[i]));
 
@@ -57,14 +59,14 @@ angular.module('dyiCaskApp')
         function(response) {
           var places = [];
 
-          $log.debug(response);
-
+          // Process page events
           for (var j = 0; j < response.length; j++)
           {
             var events = response[j].data
                               .map(function (e) { return {
                                 place_id: e.place.id,
                                 place_name: e.place.name,
+                                event_id: e.id,
                                 event_name: e.name,
                                 location: e.place.location,
                                 start_time: new Date(e.start_time) }; 
@@ -77,7 +79,6 @@ angular.module('dyiCaskApp')
                                       return 0; 
                               });
 
-            
             if (events != null && events.length > 0)
             {
               var e = events[0];
@@ -88,10 +89,36 @@ angular.module('dyiCaskApp')
                                 place_were_here_count: $scope.placeInfo[e.place_id].were_here_count,
                                 events: events });
             }
-          }
 
-          $scope.places = places;
-          $log.debug($scope.places);
+            var eventPromises = [];
+
+            // Get event cover photos
+            for(var k = 0; k < events.length; k++)
+              eventPromises.push(facebookService.getEventCoverPhotoById(events[k].event_id));
+
+            $q.all(eventPromises).then(
+              function(eventResponse) {
+                  // Store event cover data in lookup
+                  for (var m = 0; m < eventResponse.length; m++)
+                      eventDataMap[eventResponse[m].id] = (eventResponse[m].cover != null)?eventResponse[m].cover.source:null;
+
+                  $scope.places = places;
+                  $scope.upcomingEvents = $scope.places.map(function (e) { return { place_name: e.place_name, 
+                                                                                    place_img_url: e.place_img_url,
+                                                                                    place_likes: e.place_likes,
+                                                                                    place_were_here_count: e.place_were_here_count,
+                                                                                    current_event: (e.events.length > 0)?e.events[0]:null,
+                                                                                    current_event_cover_url: (e.events.length > 0)?eventDataMap[e.events[0].event_id]:"http://www.visualcandi.com/wp-content/uploads/2013/05/white.png" };
+                                                                                });
+
+                  $log.debug("$scope.places");
+                  $log.debug($scope.places);
+                  $log.debug("$scope.upcomingEvents");
+                  $log.debug($scope.upcomingEvents);
+              },
+              function( eventResponse) {}
+            );
+          }  
         },
         function(response) {
           //$log.debug(response);
