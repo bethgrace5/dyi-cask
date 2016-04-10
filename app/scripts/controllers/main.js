@@ -110,7 +110,8 @@ angular.module('dyiCaskApp')
                       eventDataMap[eventResponse[m].id] = (eventResponse[m].cover != null)?eventResponse[m].cover.source:null;
 
                   $scope.places = places;
-                  $scope.upcomingEvents = $scope.places.map(function (e) { return { place_name: e.place_name, 
+                  $scope.upcomingEvents = $scope.places.map(function (e) { return { place_id: e.place_id,
+                                                                                    place_name: e.place_name, 
                                                                                     place_img_url: e.place_img_url,
                                                                                     place_likes: e.place_likes,
                                                                                     place_were_here_count: e.place_were_here_count,
