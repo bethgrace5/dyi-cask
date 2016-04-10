@@ -8,7 +8,7 @@
  * Controller of the dyiCaskApp
  */
 angular.module('dyiCaskApp')
-  .controller('MainCtrl', function (facebookService, $q, $log, $scope) {
+  .controller('MainCtrl', function (facebookService, $q, $log, $scope, $location, $rootScope) {
 
     $scope.placeRef = [
       '410616265786425',
@@ -23,6 +23,12 @@ angular.module('dyiCaskApp')
       ];  
 
     $scope.placeInfo = {}
+    $rootScope.activeTab = '/';
+    $scope.isActive = function(isActive) {
+      if (isActive) {
+        return 'active';
+      }
+    }
 
     $scope.getPageInfoByIds = function(page_ids)
     {

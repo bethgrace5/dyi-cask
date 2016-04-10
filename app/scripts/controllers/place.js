@@ -8,8 +8,17 @@
  * Controller of the dyiCaskApp
  */
 angular.module('dyiCaskApp')
-  .controller('PlaceCtrl', function ($scope, $routeParams) {
+  .controller('PlaceCtrl', function ($scope, $routeParams, $rootScope, $log) {
+    $rootScope.activeTab = '';
     $scope.id = $routeParams.id;
+
+    // the user is looking at a specific place
+    if($scope.id) {
+    }
+    // the user is looking at a list of places
+    else {
+      $rootScope.activeTab = '/place';
+    }
 
     $scope.array = [
     {"event": "Karaoke",
