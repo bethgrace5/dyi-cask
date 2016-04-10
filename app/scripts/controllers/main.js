@@ -22,6 +22,18 @@ angular.module('dyiCaskApp')
       '290894474287798'
       ];
 
+  $scope.selectedEvent = 'karaoke';
+  $scope.selectedPlace = '';
+  $scope.events = [
+    'karaoke',
+    'live music',
+    'happy hour',
+    'beer pong',
+    'ladies night',
+    'cheap eats',
+    'singles mixer'
+  ]
+
     $scope.placeInfo = {}
     $rootScope.activeTab = '/';
     $scope.isActive = function(isActive) {

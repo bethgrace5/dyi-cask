@@ -25,6 +25,42 @@
 </div> <!-- Carousel -->
 <br/>
 
+<div class="panel panel-default">
+  <div class="panel-body">
+    <form>
+      <div class="row">
+        <div class="col-sm-3 col-xs-12">
+          <label class="form-control">
+            I'd like to see
+          </label>
+        </div>
+        <div class="col-sm-3 col-xs-12">
+          <select 
+            class="form-control"
+            ng-options="item as item for item in events track by $index" 
+            ng-model="selectedEvent"></select>
+        </div>
+        <div class="col-sm-1 col-xs-12">
+          <label class="form-control">
+             at
+          </label>
+        </div>
+        <div class="col-sm-3 col-xs-12">
+          <select 
+            class="form-control"
+            ng-options="item as item.place_name for item in places track by $index" 
+            ng-model="selectedPlace"></select>
+        </div>
+        <div class="col-sm-2 col-xs-12">
+          <button class="form-control btn btn-success">
+            Submit
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
 <script>
   $('.carousel').carousel();
 </script>
