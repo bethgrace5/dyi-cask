@@ -1,19 +1,12 @@
-<div class="jumbotron">
-  <h1>{{example}}</h1>
-  <p class="lead">
-    <!--<img src="images/yeoman.png" alt="I'm Yeoman"><br>-->
-    This event has no description yet.
-  </p>
+<div class="container">
+
+  <div class="jumbotron">
+    <h1>{{place.name}}</h1>
+    <img ng-src="{{place.picture.data.url}}"/>
+    <p class="lead">
+      {{place.likes}} people like {{place.name}}
+    </p>
+  </div>
+
 </div>
 
-<div class="row marketing" ng-repeat="x in array">
-  <h4>{{x.event}}</h4>
-  <p>
-    <strong>
-      {{x.description}}
-    </strong>
-  </p>
-  <p>
-    {{x.time}}
-  </p>
-</div>

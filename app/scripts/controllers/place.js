@@ -8,16 +8,45 @@
  * Controller of the dyiCaskApp
  */
 angular.module('dyiCaskApp')
-  .controller('PlaceCtrl', function ($scope, $routeParams) {
+  .controller('PlaceCtrl', function ($scope, $routeParams, $rootScope, $log, facebookService) {
+    $rootScope.activeTab = '';
     $scope.id = $routeParams.id;
+    $scope.place = {};
 
-    $scope.array = [
-    {"event": "Karaoke",
-     "description": "People sing and you are one of the people!",
-     "time":  "Thursday April 14th, 21:00"},
-    {"event": "Paint Night",
-     "description": "People paint paintings on each other!",
-     "time": "Monday April 18th, 18:00"}
-    ];
+    // get a single place by the URL param id
+    $scope.getPlace = function() {
+      
+      _.map($scope.item, function(place) {
+        //$log.debug(item);
+        //if (item.place_id === $scope.id) {
+          //$scope.place = item;
+        //}
+      });
+
+      if ($rootScope.facebookIsReady && $scope.id) {
+        facebookService.getPageInfoById($scope.id).then(
+          function(success){ 
+            $scope.place = success;
+          },
+          function(failure) {
+            //$log.debug(failure);
+        });
+      }
+    }
+
+    // the user is looking at a specific place
+    if($scope.id) {
+      if ($rootScope.facebookIsReady) {
+        $scope.getPlace();
+      }
+    }
+    // the user is looking at a list of places
+    else {
+      $rootScope.activeTab = '/place';
+    }
+
+    $scope.$on('fb-init', function(event, args) {
+      $scope.getPlace();
+    });
 
   });
