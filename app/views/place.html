@@ -1,24 +1,25 @@
 <div class="container">
 
   <div class="jumbotron">
-    <h1>{{place.name}}</h1>
-    <img ng-src="{{place.picture.data.url}}"/>
+    <h1>{{thisPlace.place_name}}</h1>
+    <img ng-src="{{thisPlace.place_img_url}}"/>
     <p class="lead">
-      {{place.likes}} people like {{place.name}}
+      {{thisPlace.place_likes}} people like {{thisPlace.place_name}}
     </p>
   </div>
 
-  <div ng-repeat="e in place.events">
+  <div ng-repeat="e in thisPlace.events | orderBy:start_time:reverse">
     <div class="panel panel-default" >
       <div class="panel-body">
         <div class="row">
-          <div class="col-xs-3">
-            Event
-          </div>
           <div class="col-xs-9">
-            <p class="lead">
-              {{p.place_name}}
-            </p>
+            <p class="lead"> {{e.event_name}} </p>
+            <p> {{getDate(e.start_time)}}</p>
+            <hr/>
+            <a target="blank" ng-href="http://maps.google.com/?q={{e.location.street}},{{e.location.zip}}">
+              <p> {{e.location.street}} </p>
+              <p> {{e.location.zip}} </p>
+            </a>
           </div>
         </div>
       </div>
