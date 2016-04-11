@@ -1,7 +1,11 @@
 <div class="container">
 
   <div class="jumbotron">
-    <h1>{{thisPlace.place_name}}</h1>
+    <h1>{{thisPlace.place_name}}
+      <a ng-href="https://www.facebook.com/{{thisPlace.place_id}}/events">
+        <img src="http://webdata.psru.ac.th/~pisut/distfiles_80/gajim-0.15/data/iconsets/transports/facebook/16x16/chat.png"/>
+      </a>
+    </h1>
     <img ng-src="{{thisPlace.place_img_url}}"/>
     <p class="lead">
       {{thisPlace.place_likes}} people like {{thisPlace.place_name}}
@@ -19,6 +23,9 @@
             <a target="blank" ng-href="http://maps.google.com/?q={{e.location.street}},{{e.location.zip}}">
               <p> {{e.location.street}} </p>
               <p> {{e.location.zip}} </p>
+            </a>
+            <a ng-href="https://www.facebook.com/events/{{e.event_id}}">
+             View on Facebook <img src="http://webdata.psru.ac.th/~pisut/distfiles_80/gajim-0.15/data/iconsets/transports/facebook/16x16/chat.png"/>
             </a>
           </div>
         </div>
