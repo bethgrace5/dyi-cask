@@ -1,6 +1,6 @@
 
 <div ng-repeat="p in places | orderBy: '-place_likes'">
-  <a href="#/place/{{p.events[0].place_id}}">
+  <a ng-href="#/place/{{p.events[0].place_id}}">
     <div class="panel panel-default" >
       <div class="panel-body">
         <div class="row">

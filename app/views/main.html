@@ -1,13 +1,42 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+    <form>
+      <div class="row">
+        <div class="col-sm-3 col-xs-12">
+          <label class="form-control">
+            I'd like to see
+          </label>
+        </div>
+        <div class="col-sm-3 col-xs-12">
+          <select 
+            class="form-control"
+            ng-options="item as item for item in events track by $index" 
+            ng-model="selectedEvent"></select>
+        </div>
+        <div class="col-sm-1 col-xs-12">
+          <label class="form-control">
+             at
+          </label>
+        </div>
+        <div class="col-sm-3 col-xs-12">
+          <select 
+            class="form-control"
+            ng-options="item as item.place_name for item in places track by $index" 
+            ng-model="selectedPlace"></select>
+        </div>
+        <div class="col-sm-2 col-xs-12">
+          <button class="form-control btn btn-success">
+            Submit
+          </button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+
 <div class="panel panel-default" ng-repeat="e in upcomingEvents">
     <div class="panel-heading"><b><a href="/place/{{e.place_id}}">{{e.current_event.event_name}}</a></b> - {{e.current_event.start_time | date:'medium'}}</div>
     <div class="panel-body">
       <img src="{{e.current_event_cover_url}}" style="margin: 0 auto; min-height: 250px !important; max-width: 670px !important; width: 100%; height: auto; overflow: hidden;"/>
     </div>
 </div>
-
-
-
-
-
-
-

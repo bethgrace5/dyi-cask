@@ -8,37 +8,36 @@
  * Controller of the dyiCaskApp
  */
 angular.module('dyiCaskApp')
-  .controller('PlaceCtrl', function ($scope, $routeParams, $rootScope, $log, facebookService) {
+  .controller('PlaceCtrl', function ($scope, $routeParams, $rootScope, $log, facebookService, $location) {
     $rootScope.activeTab = '';
-    $scope.id = $routeParams.id;
-    $scope.place = {};
+    $scope.id = parseInt($routeParams.id);
+    $scope.thisPlace = {};
 
-    // get a single place by the URL param id
-    $scope.getPlace = function() {
-      
-      _.map($scope.item, function(place) {
-        //$log.debug(item);
-        //if (item.place_id === $scope.id) {
-          //$scope.place = item;
-        //}
+    $scope.getDate = function(d) {
+      return moment(d).format("dddd, MMMM Do YYYY, h:mm a");
+    }
+
+    $scope.selectPlace = function() {
+      $scope.place = _.map($scope.places, function(p) {
+        if (parseInt(p.place_id) === $scope.id){
+          $scope.thisPlace = p;
+          return p;
+        }
       });
-
-      if ($rootScope.facebookIsReady && $scope.id) {
-        facebookService.getPageInfoById($scope.id).then(
-          function(success){ 
-            $scope.place = success;
-          },
-          function(failure) {
-            //$log.debug(failure);
-        });
+      if (_.isEmpty($scope.thisPlace)) {
+        if ($routeParams.id) {
+          $location.path( "/place" );
+        }
+      }
+      else {
       }
     }
 
+    $scope.selectPlace();
+
+
     // the user is looking at a specific place
     if($scope.id) {
-      if ($rootScope.facebookIsReady) {
-        $scope.getPlace();
-      }
     }
     // the user is looking at a list of places
     else {
@@ -46,7 +45,6 @@ angular.module('dyiCaskApp')
     }
 
     $scope.$on('fb-init', function(event, args) {
-      $scope.getPlace();
     });
 
   });
