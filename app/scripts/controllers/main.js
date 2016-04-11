@@ -116,7 +116,7 @@ angular.module('dyiCaskApp')
                                                                                     place_likes: e.place_likes,
                                                                                     place_were_here_count: e.place_were_here_count,
                                                                                     current_event: (e.events.length > 0)?e.events[0]:null,
-                                                                                    current_event_cover_url: (e.events.length > 0)?eventDataMap[e.events[0].event_id]:"http://www.visualcandi.com/wp-content/uploads/2013/05/white.png" };
+                                                                                    current_event_cover_url: (e.events.length > 0 && eventDataMap[e.events[0].event_id] != null)?eventDataMap[e.events[0].event_id]:"http://pmikenya.com/wp-content/uploads/2015/02/Color_SIlk_Upcoming_Events_wide_t.jpg" };
                                                                                 });
 
                   $log.debug("$scope.places");
