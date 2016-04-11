@@ -35,7 +35,11 @@
 </div>
 
 <div class="panel panel-default" ng-repeat="e in upcomingEvents">
-    <div class="panel-heading"><b><a href="/place/{{e.place_id}}">{{e.current_event.event_name}}</a></b> - {{e.current_event.start_time | date:'medium'}}</div>
+    <div class="panel-heading">
+      <b>{{ e.place_name }}</b><br/>
+      <span class="glyphicon glyphicon-music" style="margin-right: 5px; float: left;"></span>
+      <b><a href="/place/{{e.place_id}}">{{e.current_event.event_name}}</a></b> - {{e.current_event.start_time | date:'medium'}}
+    </div>
     <div class="panel-body">
       <img src="{{e.current_event_cover_url}}" style="margin: 0 auto; min-height: 250px !important; max-width: 670px !important; width: 100%; height: auto; overflow: hidden;"/>
     </div>
